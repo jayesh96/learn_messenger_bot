@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
 #  ------------------------ Fill this with your page access token! -------------------------------
-PAGE_ACCESS_TOKEN = "EAACRFYZByztkBACN6HZBh36huXK9gYBoUAonX1wOW0nEQSthJwyXntaxRAsaFeEtiVLjaxs7asbLaEkvgNPUTMaGFgsoSjIxwmrk2d422AwmLirZBmG0X2W7ugwHxwJ3SWWVIjdsdeabznyCfC170emnv33Ob6fgfZCIRBmUxAZDZD"
+PAGE_ACCESS_TOKEN = "EAACRFYZByztkBAAZC1MqZBq4PqurdHigZB6SB6LeILcxy06ZADtorCQH8lrcZBSvVsOVkUF2ZCumcgQBUHo13r7R1B7HYLFjaT9ZC6HgzrCl6ahKQZBYU0ACW5C1jVsQsQsmJzL3lQlD64OZCxxoEvNwmig3U4yYIGZC0vwBrXvwOo6agZDZD"
 VERIFY_TOKEN = "9711377812"
 
 # Helper function
@@ -39,16 +39,131 @@ def post_facebook_message(fbid, recevied_message):
   "recipient":{
     "id":fbid,
   },
-  "message": {
+"message": {
     "attachment": {
-      "type": "image",
+      "type": "template",
       "payload": {
-      	"url": "http://combiboilersleeds.com/images/sun/sun-8.jpg",
-        "is_reusable": true
+        "template_type": "airline_boardingpass",
+        "intro_message": "You are checked in.",
+        "locale": "en_US",
+        "boarding_pass": [
+          {
+            "passenger_name": "SMITH\/NICOLAS",
+            "pnr_number": "CG4X7U",
+            "travel_class": "business",
+            "seat": "74J",
+            "auxiliary_fields": [
+              {
+                "label": "Terminal",
+                "value": "T1"
+              },
+              {
+                "label": "Departure",
+                "value": "30OCT 19:05"
+              }
+            ],
+            "secondary_fields": [
+              {
+                "label": "Boarding",
+                "value": "18:30"
+              },
+              {
+                "label": "Gate",
+                "value": "D57"
+              },
+              {
+                "label": "Seat",
+                "value": "74J"
+              },
+              {
+                "label": "Sec.Nr.",
+                "value": "003"
+              }
+            ],
+            "logo_image_url": "http://combiboilersleeds.com/images/sun/sun-8.jpg",
+            # "header_image_url": "https:\/\/www.example.com\/en\/fb\/header.png",
+            # "qr_code": "M1SMITH\/NICOLAS  CG4X7U nawouehgawgnapwi3jfa0wfh",
+            # "above_bar_code_image_url": "https:\/\/www.example.com\/en\/PLAT.png",
+            "flight_info": {
+              "flight_number": "KL0642",
+              "departure_airport": {
+                "airport_code": "JFK",
+                "city": "New York",
+                "terminal": "T1",
+                "gate": "D57"
+              },
+              "arrival_airport": {
+                "airport_code": "AMS",
+                "city": "Amsterdam"
+              },
+              "flight_schedule": {
+                "departure_time": "2016-01-02T19:05",
+                "arrival_time": "2016-01-05T17:30"
+              }
+            }
+          },
+          {
+            "passenger_name": "JONES\/FARBOUND",
+            "pnr_number": "CG4X7U",
+            "travel_class": "business",
+            "seat": "74K",
+            "auxiliary_fields": [
+              {
+                "label": "Terminal",
+                "value": "T1"
+              },
+              {
+                "label": "Departure",
+                "value": "30OCT 19:05"
+              }
+            ],
+            "secondary_fields": [
+              {
+                "label": "Boarding",
+                "value": "18:30"
+              },
+              {
+                "label": "Gate",
+                "value": "D57"
+              },
+              {
+                "label": "Seat",
+                "value": "74K"
+              },
+              {
+                "label": "Sec.Nr.",
+                "value": "004"
+              }
+            ],
+            "logo_image_url": "http://combiboilersleeds.com/images/sun/sun-8.jpg",
+            # "header_image_url": "https:\/\/www.example.com\/en\/fb\/header.png",
+            # "qr_code": "M1JONES\/FARBOUND  CG4X7U nawouehgawgnapwi3jfa0wfh",
+            # "above_bar_code_image_url": "https:\/\/www.example.com\/en\/PLAT.png",
+            "flight_info": {
+              "flight_number": "KL0642",
+              "departure_airport": {
+                "airport_code": "JFK",
+                "city": "New York",
+                "terminal": "T1",
+                "gate": "D57"
+              },
+              "arrival_airport": {
+                "airport_code": "AMS",
+                "city": "Amsterdam"
+              },
+              "flight_schedule": {
+                "departure_time": "2016-01-02T19:05",
+                "arrival_time": "2016-01-05T17:30"
+              }
+            }
+          }
+        ]
       }
     }
   }
-})
+
+
+  })
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
     pprint(status.json())
 
